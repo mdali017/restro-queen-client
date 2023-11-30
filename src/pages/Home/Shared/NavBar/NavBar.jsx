@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import { FaArrowRight, FaBeer, FaCarAlt, FaShoppingCart } from "react-icons/fa";
 import { AuthContext } from "../../../../Provider/AuthProvider";
 import useCart from "../../../../hooks/useCart";
+import useAdmin from "../../../../hooks/useAdmin";
 
 const NavBar = () => {
   const [bg, setBg] = useState(false);
   const { user, logOut } = useContext(AuthContext);
+  const [isAdmin] = useAdmin();
   const [carts] = useCart();
 
   useEffect(() => {
@@ -37,6 +39,11 @@ const NavBar = () => {
       </li>
       <li>
         <Link to="/secret">Secret</Link>
+      </li>
+      <li>
+        <Link to={isAdmin ? "/dashboard/admin-home" : "/dashboard/user-home"}>
+          Dashboard
+        </Link>
       </li>
       <Link to="/dashboard/my-cart" tabIndex={0} className="btn btn-ghost ">
         <div className="indicator">

@@ -1,13 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import useCart from "../../../hooks/useCart";
 import { Helmet } from "react-helmet-async";
 import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const MyCart = () => {
   const [carts, refetch] = useCart();
   // console.log(carts);
   const total = carts.reduce((sum, item) => item.price + sum, 0);
+
+  // Pagination Emplement Start Here...
+  const [currentPage, setCurrentPage] = useState(1);
+  const recordPerPage = 5;
+  const lastIndex = currentPage * recordPerPage;
+  const firstIndex = lastIndex - recordPerPage;
+  const records = carts.slice(firstIndex, lastIndex);
+  const nPage = Math.ceil(carts.length / recordPerPage);
+  const numbers = [...Array(nPage + 1).keys()].slice(1);
+
+  // Function Declaire
+  const prePage = () => {
+    // console.log("prePage");
+    if (currentPage !== firstIndex) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+  const cahngeCPage = (id) => {
+    // console.log("cahngeCPage");
+    setCurrentPage(id);
+  };
+  const nextPage = () => {
+    // console.log("nextPage");
+    if (currentPage !== lastIndex) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  // Pagination Emplement End Here...
 
   const handleDelete = (item) => {
     Swal.fire({
@@ -43,7 +73,9 @@ const MyCart = () => {
       <div className="flex uppercase gap-10 font-semibold ">
         <h1>My Carts: {carts.length}</h1>
         <h1>Total Price: ${total}</h1>
-        <button className="btn btn-xs btn-warning">Pay</button>
+        <Link to="/dashboard/payment">
+          <button className="btn btn-xs btn-warning">Pay</button>
+        </Link>
       </div>
       <div className="overflow-x-auto">
         <table className="table">
@@ -58,7 +90,7 @@ const MyCart = () => {
             </tr>
           </thead>
           <tbody>
-            {carts.map((item, index) => (
+            {records.map((item, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>
@@ -87,6 +119,61 @@ const MyCart = () => {
             ))}
           </tbody>
         </table>
+        {/* <nav>
+          <ul>
+            <li className="join">
+              <a
+                href="#"
+                className="join-item btn btn-outline"
+                onClick={prePage}
+              >
+                Prev
+              </a>
+            </li>
+            {numbers.map((n, i) => (
+              <li
+                key={i}
+                className={`join-item ${currentPage === n ? "active" : ""}`}
+              >
+                <a
+                  href="#"
+                  className={`join-item `}
+                  onClick={() => cahngeCPage(n)}
+                >
+                  {n}
+                </a>
+              </li>
+            ))}
+            <li className="page-item">
+              <a href="#" className="page-link" onClick={nextPage}>
+                Next
+              </a>
+            </li>
+          </ul>
+        </nav> */}
+        <div className="join my-10">
+          <button onClick={prePage} className="join-item btn btn-outline">
+            Prev
+          </button>
+          {numbers.map((n, i) => (
+            <button
+              onClick={() => cahngeCPage(n)}
+              key={i}
+              className={`join-item btn ${
+                currentPage === n ? "btn-active" : ""
+              }`}
+            >
+              {n}
+            </button>
+          ))}
+          {/* <button className="join-item btn">1</button>
+          <button className="join-item btn btn-active">2</button>
+          <button className="join-item btn">3</button>
+          <button className="join-item btn">4</button> */}
+          <button onClick={nextPage} className="join-item btn btn-outline">
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );

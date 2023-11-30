@@ -40,19 +40,68 @@ const Login = () => {
       });
   };
   return (
-    <div className="hero min-h-screen bg-base-200">
-      <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-        <h1 className="bg-gray-300 py-4 text-center font-semibold text-xl uppercase ">
-          Please Log In
-        </h1>
-        <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+    <>
+      <div className="hero min-h-screen bg-base-200">
+        <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+          <h1 className="bg-gray-300 py-4 text-center font-semibold text-xl uppercase ">
+            Please Log In
+          </h1>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="card-body bg-gray-600 w-11/12"
+          >
+            <div className="form-control]">
+              <label>
+                <span className="text-black">Email</span>
+              </label>
+              <input
+                type="email"
+                {...register("email", { required: true })}
+                placeholder="email"
+                className="w-full input input-bordered "
+                required
+              />
+            </div>
+            <div className="form-control">
+              <label>
+                <span className="text-black">Password</span>
+              </label>
+              <input
+                type="password"
+                {...register("password", { required: true })}
+                placeholder="password"
+                className="w-full input input-bordered"
+                required
+              />
+              <label className="label">
+                <a href="#" className="label-text-alt link link-hover">
+                  Forgot password?
+                </a>
+              </label>
+            </div>
+            <div className="form-control mt-6">
+              <button type="submit" className="btn btn-primary">
+                Login
+              </button>
+            </div>
+            <small>
+              New Here?
+              <Link to="/signup" className="text-blue-500 ml-1 font-semibold">
+                Please Register
+              </Link>
+            </small>
+          </form>
+          <SocialLogIn />
+        </div>
+      </div>
+      {/* <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+        <form className="card-body">
           <div className="form-control">
             <label className="label">
               <span className="label-text">Email</span>
             </label>
             <input
               type="email"
-              {...register("email", { required: true })}
               placeholder="email"
               className="input input-bordered"
               required
@@ -64,7 +113,6 @@ const Login = () => {
             </label>
             <input
               type="password"
-              {...register("password", { required: true })}
               placeholder="password"
               className="input input-bordered"
               required
@@ -76,20 +124,11 @@ const Login = () => {
             </label>
           </div>
           <div className="form-control mt-6">
-            <button type="submit" className="btn btn-primary">
-              Login
-            </button>
+            <button className="btn btn-primary">Login</button>
           </div>
-          <small>
-            New Here?
-            <Link to="/signup" className="text-blue-500 ml-1 font-semibold">
-              Please Register
-            </Link>
-          </small>
         </form>
-        <SocialLogIn />
-      </div>
-    </div>
+      </div> */}
+    </>
   );
 };
 

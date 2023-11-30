@@ -48,7 +48,7 @@ const FoodCard = ({ item }) => {
 
   return (
     <div>
-      <div className="card w-96 bg-base-100 shadow-xl ">
+      {/* <div className="card w-96 bg-base-100 shadow-xl ">
         <figure>
           <img src={image} alt={name} />
           <p className="absolute right-0 mr-4 px-4 bg-slate-900 text-white top-0">
@@ -67,6 +67,26 @@ const FoodCard = ({ item }) => {
                 Add to Cart
               </button>
             </div>
+          </div>
+        </div>
+      </div> */}
+      {/* custom card */}
+      <div className="border w-[300px] h-[380px]">
+        <div>
+          <img src={image} className="relative" alt="" />
+          <p className="absolute -mt-12 mr-4 px-4 bg-slate-900 text-white  ">
+            ${price}
+          </p>
+        </div>
+        <div className="">
+          <div className="my-2 h-[100px]">
+            <h3 className="text-md">{name}</h3>
+            <h4 className="text-sm">{recipe}</h4>
+          </div>
+          <div className="text-center flex justify-center items-center ">
+            <button className="" onClick={() => handleAddToCart(item)}>
+              Add to Cart
+            </button>
           </div>
         </div>
       </div>

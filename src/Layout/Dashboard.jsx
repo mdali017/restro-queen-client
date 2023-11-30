@@ -8,17 +8,20 @@ import {
   FaWallet,
   FaShoppingBag,
   FaUsers,
+  FaBook,
 } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
 import useCart from "../hooks/useCart";
 import { ImSpoonKnife } from "react-icons/im";
 import { TfiMenuAlt } from "react-icons/tfi";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
   const [carts] = useCart();
 
-  // TODO
-  const isAdmin = true;
+  // TODO: Load data from the server to have dynamics user role.
+  // const isAdmin = true;
+  const [isAdmin] = useAdmin();
 
   return (
     <div>
@@ -45,34 +48,34 @@ const Dashboard = () => {
             {isAdmin ? (
               <>
                 <li>
-                  <Link to="/my-cart">
+                  <Link to="/dashboard/admin-home">
                     <FaHome />
                     Admin Home
                   </Link>
                 </li>
                 <li>
-                  <Link to="/my-cart">
+                  <Link to="/dashboard/additem">
                     <ImSpoonKnife />
                     Add Item
                   </Link>
                 </li>
                 <li>
-                  <Link to="/dashboard/all-users">
+                  <Link to="/dashboard/allusers">
                     <FaUsers />
-                    Manage Users
+                    All Users
                   </Link>
                 </li>
                 <li>
-                  <Link to="/my-cart">
-                    <TfiMenuAlt />
-                    Manage Booking
+                  <Link to="/dashboard/manage-items">
+                    <FaBook />
+                    Manage Item
                   </Link>
                 </li>
               </>
             ) : (
               <>
                 <li>
-                  <Link to="/my-cart">
+                  <Link to="/dashboard/user-home">
                     <FaHome />
                     User Home
                   </Link>
