@@ -87,7 +87,7 @@ const Dashboard = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/my-cart">
+                  <Link to="/dashboard/payment-history">
                     <FaWallet />
                     Payment History
                   </Link>

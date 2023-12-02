@@ -34,11 +34,11 @@ const SocialLogIn = () => {
   };
 
   return (
-    <div className="text-center py-3">
+    <div className="text-center ">
       <div className="divider"></div>
       <button
         onClick={handleGoogleSingnIn}
-        className="btn btn-circle btn-outline"
+        className="btn btn-circle btn-warning btn-outline"
       >
         <FaGoogle />
       </button>
